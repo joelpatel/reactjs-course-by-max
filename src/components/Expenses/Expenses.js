@@ -7,15 +7,39 @@ import Card from "../UI/Card";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  const [yearFilter, setYearFilter] = useState("2020");
+  const [yearFilter, setYearFilter] = useState("All");
+  // const [expenses, setExpenses] = useState(props.expenses);
 
   const changeYearFilter = (filterYear) => {
     setYearFilter(filterYear);
   };
 
-  useEffect(() => {
-    console.log(yearFilter);
-  }, [yearFilter]);
+  const expenses = props.expenses.filter((expense) => {
+    if (yearFilter !== "All") {
+      return expense.date.getFullYear().toString() === yearFilter;
+    } else {
+      return true;
+    }
+  });
+
+  // useEffect(() => {
+  //   setExpenses(props.expenses);
+  // }, [props.expenses]);
+
+  // useEffect(() => {
+  //   setExpenses(() => {
+  //     let newExpenses = undefined;
+  //     if (yearFilter !== "All") {
+  //       newExpenses = props.expenses.filter(
+  //         (expense) => expense.date.getFullYear().toString() === yearFilter
+  //       );
+  //     } else {
+  //       newExpenses = props.expenses;
+  //     }
+
+  //     return newExpenses;
+  //   });
+  // }, [yearFilter, props.expenses]);
 
   return (
     <Card className="expenses">
@@ -23,7 +47,7 @@ const Expenses = (props) => {
         selected={yearFilter}
         onChangeYearFilter={changeYearFilter}
       />
-      {props.expenses.map((expense) => (
+      {expenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
           title={expense.title}

@@ -32,7 +32,6 @@ const App = () => {
       // return prevExpenses;
       return [expenseData, ...prevExpenses];
     });
-    // console.log(expenses);
   };
 
   return (
