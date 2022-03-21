@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import ExpenseItem from "./ExpenseItem";
 import ExpensesFilter from "./ExpensesFilter";
@@ -21,6 +21,19 @@ const Expenses = (props) => {
       return true;
     }
   });
+
+  let expensesContent = <p>No expenses found.</p>;
+
+  if (expenses.length > 0) {
+    expensesContent = expenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
 
   // useEffect(() => {
   //   setExpenses(props.expenses);
@@ -47,14 +60,29 @@ const Expenses = (props) => {
         selected={yearFilter}
         onChangeYearFilter={changeYearFilter}
       />
-      {expenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      {expensesContent}
+      {/* {expenses.length === 0 && <p>No expenses found.</p>}
+      {expenses.length > 0 &&
+        expenses.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))} */}
+      {/* {expenses.length === 0 ? (
+        <p>No expenses found.</p>
+      ) : (
+        expenses.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))
+      )} */}
       {/* <ExpenseItem
         title={props.expenses[0].title}
         amount={props.expenses[0].amount}
