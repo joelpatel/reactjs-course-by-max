@@ -30,7 +30,7 @@ const App = () => {
     setExpenses((prevExpenses) => {
       // prevExpenses.push(expenseData);
       // return prevExpenses;
-      return [...prevExpenses, expenseData];
+      return [expenseData, ...prevExpenses];
     });
     // console.log(expenses);
   };
