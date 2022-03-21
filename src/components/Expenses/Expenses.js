@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import ExpenseItem from "./ExpenseItem";
+import ExpensesList from "./ExpensesList";
 import ExpensesFilter from "./ExpensesFilter";
 import Card from "../UI/Card";
 
@@ -21,19 +21,6 @@ const Expenses = (props) => {
       return true;
     }
   });
-
-  let expensesContent = <p>No expenses found.</p>;
-
-  if (expenses.length > 0) {
-    expensesContent = expenses.map((expense) => (
-      <ExpenseItem
-        key={expense.id}
-        title={expense.title}
-        amount={expense.amount}
-        date={expense.date}
-      />
-    ));
-  }
 
   // useEffect(() => {
   //   setExpenses(props.expenses);
@@ -60,49 +47,7 @@ const Expenses = (props) => {
         selected={yearFilter}
         onChangeYearFilter={changeYearFilter}
       />
-      {expensesContent}
-      {/* {expenses.length === 0 && <p>No expenses found.</p>}
-      {expenses.length > 0 &&
-        expenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))} */}
-      {/* {expenses.length === 0 ? (
-        <p>No expenses found.</p>
-      ) : (
-        expenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))
-      )} */}
-      {/* <ExpenseItem
-        title={props.expenses[0].title}
-        amount={props.expenses[0].amount}
-        date={props.expenses[0].date}
-        />
-        <ExpenseItem
-        title={props.expenses[1].title}
-        amount={props.expenses[1].amount}
-        date={props.expenses[1].date}
-        />
-        <ExpenseItem
-        title={props.expenses[2].title}
-        amount={props.expenses[2].amount}
-        date={props.expenses[2].date}
-        />
-        <ExpenseItem
-        title={props.expenses[3].title}
-        amount={props.expenses[3].amount}
-        date={props.expenses[3].date}
-      /> */}
+      <ExpensesList expenses={expenses} />
     </Card>
   );
 };
